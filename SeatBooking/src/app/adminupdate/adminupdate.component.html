@@ -1,0 +1,39 @@
+<div *ngIf="errorFlag" class="alert alert-danger">
+    <p>Something went wrong!..</p>
+</div>
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="container p-0 d-flex justify-content-center ">
+        <div class="col-12 col-sm-12">
+            <div class="form-group row justify-content-center">
+                <mat-label class="col-sm-5 text-right">Booking Date</mat-label>
+                <div class="d-block col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <input matInput [min]="mystartDate" [matDatepicker]="picker1" autocomplete="off" 
+                        [ngClass]="{ 'is-invalid': submitted && f.bookingdate.errors }"
+                            class="form-control col-sm-10" formControlName="bookingdate" placeholder="Booking Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.bookingdate.errors" class="invalid-feedback">
+                        <div *ngIf="f.bookingdate.errors">Booking date is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <button [disabled]="loading" class="btn btn-primary button-space-mr">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Update
+                </button>
+                <button class="btn btn-primary" (click)="cancel();">
+                    Cancel
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    
+    
+
+</form>

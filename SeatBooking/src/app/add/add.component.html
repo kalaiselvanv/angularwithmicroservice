@@ -1,0 +1,85 @@
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="errorFlag" class=" form-group alert alert-danger">
+        <p>Something went wrong!..</p>
+    </div>
+    <div class="container p-0 d-flex justify-content-center ">
+        <div class="col-12 col-sm-12">
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 text-right" for="employeeid">Employee ID</label>
+                <div class="d-block col-sm-6">
+                    <input type="text" formControlName="employeeid" class="form-control col-sm-10"
+                        [ngClass]="{ 'is-invalid': submitted && f.employeeid.errors }" placeholder="E0002" />
+                    <div *ngIf="submitted && f.employeeid.errors" class="invalid-feedback">
+                        <div *ngIf="f.employeeid.errors.required">Employee ID is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 text-right" for="address">Office Address</label>
+                <div class="d-block col-sm-6">
+                    <input type="text" formControlName="address" class="form-control col-sm-10"
+                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }" placeholder="Siruseri, Chennai" />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">office address is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 text-right" for="seatnumber">Seat Number</label>
+                <div class="d-block col-sm-6">
+                    <input type="text" formControlName="seatnumber" class="form-control col-sm-10"
+                        [ngClass]="{ 'is-invalid': submitted && f.seatnumber.errors }" placeholder="CB008" />
+                    <div *ngIf="submitted && f.seatnumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.seatnumber.errors.required">Seat number is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 text-right" for="floornumber">Floor Number</label>
+                <div class="d-block col-sm-6">
+                    <input type="text" formControlName="floornumber" class="form-control col-sm-10"
+                        [ngClass]="{ 'is-invalid': submitted && f.floornumber.errors }" placeholder="4" />
+                    <div *ngIf="submitted && f.floornumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.floornumber.errors.required">Floor number is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <mat-label class="col-sm-2 text-right">Booking Date</mat-label>
+                <div class="d-block col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <input matInput [min]="mystartDate" [matDatepicker]="picker1" autocomplete="off"
+                            class="form-control col-sm-10" formControlName="bookingdate" placeholder="04-08-2022">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 text-right" for="slot">Booking Slot</label>
+                <div class="d-block col-sm-6">
+                    <input type="text" formControlName="slot" class="form-control col-sm-10"
+                        [ngClass]="{ 'is-invalid': submitted && f.slot.errors }" placeholder="9am - 8pm" />
+                    <div *ngIf="submitted && f.slot.errors" class="invalid-feedback">
+                        <div *ngIf="f.slot.errors.required">Booking slot is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <button [disabled]="loading" class="btn btn-primary button-space-mr">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Add
+                </button>
+
+                <button class="btn btn-primary" (click)="cancel();">
+                    Cancel
+                </button>
+
+            </div>
+        </div>
+    </div>
+    
+
+</form>

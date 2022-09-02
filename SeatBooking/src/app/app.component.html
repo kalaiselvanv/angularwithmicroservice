@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+<mat-toolbar-row>
+  <span class="toolbar toolbar-span"><h1>
+    Seat Booking System
+  </h1></span>
+  <span class="text-right"><a *ngIf="currentUser" (click)="logout()">Logout</a></span>
+</mat-toolbar-row>
+</mat-toolbar>
+
+<app-breadcrumb *ngIf="currentUser"></app-breadcrumb>
+
+   
+      <div>          
+        <router-outlet></router-outlet>          
+      </div>
+  

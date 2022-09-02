@@ -1,0 +1,76 @@
+<div *ngIf="errorFlag" class="alert alert-danger text-center">
+  <p>Something went wrong!..</p>
+</div>
+<div>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="container p-0 d-flex justify-content-center ">
+      <div class="col-12 col-sm-12">
+        <div class="form-group row justify-content-center">
+          <input type="text" formControlName="bookingid" class="form-control col-sm-3 mr-" placeholder="Booking Id" />
+          <input type="text" formControlName="bookingaddress" class="form-control col-sm-3"
+            placeholder="Office address" />
+          <mat-form-field appearance="outline" class="form-control col-sm-2">
+            <input matInput [min]="mystartDate" [matDatepicker]="picker1home" autocomplete="off"
+              formControlName="bookingdate" placeholder="Booking Date">
+            <mat-datepicker-toggle matSuffix [for]="picker1home"></mat-datepicker-toggle>
+            <mat-datepicker #picker1home color="primary"></mat-datepicker>
+          </mat-form-field>
+          <div class="col-sm-2">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Search
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <div *ngIf="clientCheck">
+              <button class="btn btn-primary" (click)="addClick();">
+                Add
+              </button>
+            </div>
+            <div *ngIf="!clientCheck">
+              <button class="btn btn-primary" (click)="adminBulkUpdate();">
+                AdminUpdate
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Booking ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"><a [routerLink]="[element.id, 'edit']"> B{{element.id}}</a> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="bookingDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Booking Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.bookingDate}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="employeeId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Employee Id</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.employeeId}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div *ngIf="dataSource && dataSource.data.length===0" class="text-center"> No records found</div>
+    <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+
+  </div>
+</div>
